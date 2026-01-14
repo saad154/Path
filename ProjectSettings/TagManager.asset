@@ -8,6 +8,7 @@ TagManager:
   - TopDoorKey
   - Death
   - Coin
+  - Dirt
   layers:
   - Default
   - TransparentFX

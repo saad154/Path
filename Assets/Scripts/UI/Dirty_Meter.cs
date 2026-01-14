@@ -6,7 +6,7 @@ public class Dirty_Meter : MonoBehaviour
     public float maximumDirty = 1f;
     public float startDirtyMeter;
     public float currentDirtyMeterValue;
-    public Slider dirtyMeter;
+    private Slider dirtyMeter;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
