@@ -17,6 +17,7 @@ public class TimeManager : MonoBehaviour
         UpdateDisplay(timeRemaining);
         gameOver.SetActive(false);
         canva.planeDistance = 13.51f;
+        GameManager.instance.overState = false;
     }
 
     void Update()
@@ -36,6 +37,7 @@ public class TimeManager : MonoBehaviour
             gameOver.SetActive(true);
             canva.planeDistance = 8f;
             Time.timeScale = 0;
+            GameManager.instance.overState = true;
         }
     }
 

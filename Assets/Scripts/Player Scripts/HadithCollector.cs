@@ -25,6 +25,7 @@ public class HadithCollector : MonoBehaviour
             canva.planeDistance = 13.51f;
             canHide = false;
             Time.timeScale = 1f;
+            GameManager.instance.isPaused = false;
         }
     }
 
@@ -37,6 +38,7 @@ public class HadithCollector : MonoBehaviour
             hadithDisplay.gameObject.SetActive(true);
             canHide = true;
             Time.timeScale = 0f;
+            GameManager.instance.isPaused = true;
             Destroy(other.gameObject); // Remove collected Hadith
             canva.planeDistance = 9f;
         }
