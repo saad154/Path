@@ -2692,6 +2692,53 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hadith
   hadithImage: {fileID: 21300000, guid: ffd3c9ba8ed22bd499aeae76758cbbd0, type: 3}
+--- !u!1 &1312400636
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1312400637}
+  - component: {fileID: 1312400638}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1312400637
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312400636}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1312400638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312400636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbf575bbf2521b24ba4ea0b38c900f57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  isPaused: 0
+  overState: 0
+  finishedState: 0
 --- !u!1 &1319363579
 GameObject:
   m_ObjectHideFlags: 0
@@ -3632,7 +3679,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f748e54e868ea734db27dbbad9171dd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tme
-  timeRemaining: 180
+  timeRemaining: 5
   timerIsRunning: 0
   countdownText: {fileID: 961446755}
   gameOver: {fileID: 1022915468}
@@ -4291,3 +4338,4 @@ SceneRoots:
   - {fileID: 1689033297}
   - {fileID: 2091223423}
   - {fileID: 1361298730}
+  - {fileID: 1312400637}
