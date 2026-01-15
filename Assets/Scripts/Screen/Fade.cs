@@ -4,8 +4,11 @@ public class Fade : MonoBehaviour
 {
     public ScreenFade screenFade;
     public TimeManager time;
-
     public Canvas canva;
+    public Dirty_Meter dirty;
+    public GameObject dirtMeterObject;
+
+    bool triggered;
 
     private void Start()
     {
@@ -14,11 +17,21 @@ public class Fade : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (triggered) return;
+        if (!other.CompareTag("Player")) return;
+
+        if (dirty.currentDirtvalue > 0f)
         {
-            screenFade.FadeInAndPause();
-            time.timerIsRunning = false;
-            canva.planeDistance = 9f;
+            Debug.Log("Go get yourself cleaned");
+            return;
         }
+
+        triggered = true;
+        screenFade.FadeInAndPause();
+        time.timerIsRunning = false;
+        canva.planeDistance = 9f;
+
+        if (dirtMeterObject)
+            dirtMeterObject.SetActive(false);
     }
 }
