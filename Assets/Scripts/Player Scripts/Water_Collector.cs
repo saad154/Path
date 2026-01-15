@@ -2,8 +2,14 @@ using UnityEngine;
 
 public class Water_Collector : MonoBehaviour
 {
-    public Dirty_Meter dirt;
+    Dirty_Meter dirt;
+
     float waterCollectedValue = 0.2f;
+
+    private void Start()
+    {
+        dirt = GetComponent<Dirty_Meter>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -18,5 +24,6 @@ public class Water_Collector : MonoBehaviour
         );
 
         dirt.dirtyMeter.value = dirt.currentDirtvalue;
+        Destroy(other.gameObject);
     }
 }
