@@ -9,6 +9,7 @@ TagManager:
   - Death
   - Coin
   - Dirt
+  - Clean
   layers:
   - Default
   - TransparentFX
