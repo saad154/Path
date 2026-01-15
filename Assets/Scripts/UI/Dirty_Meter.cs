@@ -3,32 +3,25 @@ using UnityEngine.UI;
 
 public class Dirty_Meter : MonoBehaviour
 {
-    public float maximumDirty = 1f;
-    public float startDirtyMeter;
-    public float currentDirtyMeterValue;
-    private Slider dirtyMeter;
+    public Slider dirtyMeter;
 
+    public float maxDirtValue = 1f;
+    public float currentDirtvalue;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
-        startDirtyMeter = 0f;
-        dirtyMeter = GetComponent<Slider>();
-        dirtyMeter.value = 0f;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        currentDirtvalue = 0;
+        dirtyMeter.maxValue = maxDirtValue;
+        dirtyMeter.minValue = currentDirtvalue;
+        dirtyMeter.value = 0;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Dirt" && currentDirtyMeterValue != maximumDirty)
-        {
-            currentDirtyMeterValue += 0.2f;
-            dirtyMeter.value = currentDirtyMeterValue;
-        }
+        if (!other.gameObject.CompareTag("Dirt")) return;
+
+        currentDirtvalue = Mathf.Clamp(currentDirtvalue + 0.2f, 0, maxDirtValue);
+
+        dirtyMeter.value = currentDirtvalue;
     }
 }
