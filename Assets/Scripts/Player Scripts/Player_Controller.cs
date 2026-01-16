@@ -17,7 +17,6 @@ public class Player_Controller : MonoBehaviour
     public bool isGrounded;
     public GameObject spawn;
 
-
     void Awake()
     {
         controls = new Player_Controls();
@@ -25,9 +24,10 @@ public class Player_Controller : MonoBehaviour
         animator = GetComponent<Animator>();
 
         rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
 
         controls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
-        controls.Player.Move.canceled += ctx => moveInput = Vector2.zero;
+        controls.Player.Move.canceled += _ => moveInput = Vector2.zero;
         controls.Player.Jump.performed += _ => Jump();
     }
 
@@ -36,42 +36,19 @@ public class Player_Controller : MonoBehaviour
 
     void FixedUpdate()
     {
+        GroundCheck();
         MovePlayer();
-        UpdateAnimations();
-    }
-
-    private void Start()
-    {
-        
     }
 
     void Update()
     {
-        GroundCheck();
-
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            transform.rotation = Quaternion.Euler(0f, -90f, 0f);
-        }
-
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            transform.rotation = Quaternion.Euler(0f, 90f, 0f);
-        }
+        UpdateAnimations();
+        RotatePlayer();
     }
 
     void MovePlayer()
     {
         rb.linearVelocity = new Vector3(moveInput.x * moveSpeed, rb.linearVelocity.y, 0f);
-    }
-
-    void UpdateAnimations()
-    {
-        bool isMoving = Mathf.Abs(moveInput.x) > 0.1f;
-        animator.SetBool("isMoving", isMoving);
-
-        bool isJumpingUp = !isGrounded && rb.linearVelocity.y > 0.1f;
-        animator.SetBool("isJumpingUp", isJumpingUp);
     }
 
     void Jump()
@@ -87,12 +64,23 @@ public class Player_Controller : MonoBehaviour
         isGrounded = Physics.Raycast(transform.position, Vector3.down, groundDistance, groundMask);
     }
 
+    void UpdateAnimations()
+    {
+        animator.SetBool("isMoving", Mathf.Abs(moveInput.x) > 0.1f);
+        animator.SetBool("isJumpingUp", !isGrounded && rb.linearVelocity.y > 0.1f);
+    }
+
+    void RotatePlayer()
+    {
+        if (moveInput.x > 0.1f)
+            transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+        else if (moveInput.x < -0.1f)
+            transform.rotation = Quaternion.Euler(0f, -90f, 0f);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-
-        if (other.gameObject.tag == "Death")
-        {
+        if (other.CompareTag("Death"))
             transform.position = spawn.transform.position;
-        }
     }
 }
